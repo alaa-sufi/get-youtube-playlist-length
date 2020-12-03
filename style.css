@@ -1,0 +1,172 @@
+html {
+  font-siz: 70%;
+}
+
+.container {
+  max-width: 1140px;
+  margin: auto;
+  padding-top: 2rem;
+  font-family: Montserrat, sans-serif;
+  background-color: #fff;
+  color: #282828;
+  text-align: center;
+}
+.container h1 {
+  font-size: 2rem;
+  font-weight: normal;
+}
+.container h1 strong {
+  font-weight: bold;
+}
+.container h1 strong span {
+  background-color: #ff0000;
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.3rem;
+}
+.container .input {
+  width: 70%;
+  display: block;
+  margin: auto;
+  font-size: 1rem;
+  border-radius: 0.8rem;
+  padding: 0.5rem;
+}
+.container .buttons button {
+  color: #fff;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.7rem;
+  margin: 1rem;
+  border: none;
+  transition: all 0.5s ease-in-out;
+  font-size: 1rem;
+  background-color: #282828;
+  opacity: 0.8;
+}
+.container .buttons .getlength,
+.container .buttons .tryagain {
+  cursor: pointer;
+  background-color: #ff0000;
+}
+.container .buttons .getlength:hover,
+.container .buttons .tryagain:hover {
+  color: #282828;
+}
+.container .buttons .getlength .spinner,
+.container .buttons .tryagain .spinner {
+  width: 1rem;
+  fill: white;
+  display: none;
+  animation: anim-rotate 2s infinite linear;
+}
+@keyframes anim-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.container .info {
+  display: flex;
+  visibility: hidden;
+  transition: all 0.5s ease-in-out;
+  margin-top: 2rem;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.container .info > div {
+  border: 2px solid #555;
+  border-radius: 1rem;
+  padding: 0.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 15rem;
+  margin-bottom: 3rem;
+}
+.container .info .img img {
+  max-width: 100%;
+  border: 2px solid red;
+  border-radius: 20px;
+}
+.container .info .img p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.container .info svg.icon {
+  max-width: 5rem;
+  fill: #ff0000;
+}
+.container .info .pr {
+  position: relative;
+}
+.container .info .pr .result p {
+  display: none;
+}
+.container .info .pr .result p.active {
+  display: block;
+}
+.container .info svg.cog {
+  position: absolute;
+  width: 1rem;
+  fill: white;
+  right: -15px;
+  border: 1px solid #ff0000;
+  padding: 0.5rem;
+  background: #ff0000;
+  border-radius: 50%;
+  top: -8px;
+  cursor: pointer;
+  z-index: 999;
+}
+.container .info .at {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border: 1px solid;
+  right: -30px;
+  top: 22px;
+  display: none;
+}
+.container .info .at li {
+  cursor: pointer;
+}
+.container .info .at li.active {
+  color: #ff0000;
+}
+.container .info .at li:not(:last-child) {
+  border-bottom: 1px solid;
+}
+.container .error h3 {
+  color: #ff0000;
+}
+
+footer {
+  text-align: center;
+}
+footer h5 {
+  width: 100%;
+}
+footer ul {
+  list-style: none;
+  display: block;
+  margin: auto;
+  padding: 0px;
+}
+footer ul li {
+  display: inline;
+}
+footer ul li a {
+  text-decoration: none;
+  cursor: pointer;
+}
+footer ul li a svg {
+  color: #282828;
+  width: 2rem;
+}
