@@ -37,6 +37,7 @@
 }
 
 .container .input {
+  outline: none;
   width: 70%;
   margin: auto;
   font-size: 1rem;
