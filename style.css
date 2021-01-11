@@ -1,6 +1,4 @@
-html {
-  font-siz: 70%;
-}
+
 
 .container {
   max-width: 1140px;
@@ -25,36 +23,50 @@ html {
   border-radius: 20px;
   padding: 0.3rem;
 }
-.container .input {
-  width: 70%;
+
+@media (max-width: 768px) {
+  .container .buttons  ,input{
   display: block;
   margin: auto;
+
+}
+.container .buttons .getlength {
+  margin-top: 1rem;
+  
+  }
+}
+
+.container .input {
+  width: 70%;
+  margin: auto;
   font-size: 1rem;
-  border-radius: 0.8rem;
+  border-radius: 0.8rem 0;
   padding: 0.5rem;
 }
-.container .buttons button {
+@media (min-width: 769px) {
+  .container .buttons,input{
+    display: inline-block;
+
+  }
+}
+
+.container .buttons .getlength {
+  cursor: pointer;
+  background-color: #ff0000;
+  border-radius: 0 0.5rem;
+  padding: 0.7rem 0.7rem;
   color: #fff;
-  border-radius: 0.5rem;
-  padding: 0.5rem 0.7rem;
-  margin: 1rem;
   border: none;
   transition: all 0.5s ease-in-out;
   font-size: 1rem;
-  background-color: #282828;
   opacity: 0.8;
 }
-.container .buttons .getlength,
-.container .buttons .tryagain {
-  cursor: pointer;
-  background-color: #ff0000;
-}
-.container .buttons .getlength:hover,
-.container .buttons .tryagain:hover {
+
+
+.container .buttons .getlength:hover {
   color: #282828;
 }
-.container .buttons .getlength .spinner,
-.container .buttons .tryagain .spinner {
+.container .buttons .getlength .spinner{
   width: 1rem;
   fill: white;
   display: none;
@@ -69,8 +81,7 @@ html {
   }
 }
 .container .info {
-  display: flex;
-  visibility: hidden;
+  display: none;
   transition: all 0.5s ease-in-out;
   margin-top: 2rem;
   justify-content: space-around;
@@ -171,3 +182,4 @@ footer ul li a svg {
   color: #282828;
   width: 2rem;
 }
+

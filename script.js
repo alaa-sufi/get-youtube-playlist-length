@@ -20,19 +20,14 @@ var arrVideoId = [],
   playlist;
 //get lenght in click or en
 $(".getlength").on("click", function () {
-  //solve problem https or without
+  $(".info").css("display", "none");
+
    $(".getlength .spinner").css("display","inline");
   playlist = $(".input").val();
   $(".input").val("");
-
-  if (playlist.includes("youtube.com") | playlist.includes("list")) {
-    var la = playlist.search("list=") + 5;
-    playlistId = playlist.slice(la, la + 34);
-    //console.log(playlistId);
-
-    ////
-    //remove class getlength and some css
-
+  //solve problem https or without
+  if (/youtube.com|list/.test(playlist)) {
+    playlistId=playlist.match(/(?<=list=).{34}/)[0];
     $.getJSON(
       `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&key=AIzaSyBXQrcABeFrIn2Pn90UfMflUpOaba9Nz2o`,
       function (data) {
@@ -57,38 +52,11 @@ $(".getlength").on("click", function () {
             for (var l in d.items) {
               arrVideoDuration[l] = d.items[l].contentDetails.duration;
             }
-            var res = new Array();
-            for (var z in arrVideoDuration) {
-              res[z] = arrVideoDuration[z]
-                .slice(2)
-                .replace("S", "*1")
-                .replace("M", "*60b")
-                .replace("H", "*3600b");
-            }
-              //remove PT and s=>*1  m=>*60 h=>*3600 and add b instead of + to resolve problem ++
-              var res2 = res.toString().replace(/[,]/g, "a");
-              var res3 = res2.replace(/ba/g, "b");
-              var res4 = res3.replace(/b|a/g, "+");
-              var res5;
-              //solve +in the end
-              if (res4.charAt(res4.length - 1) == "+") {
-                res5 = res4.slice(0, -1);
-              } else { res5 = res4;}
-              var res6 = eval(res5);
+            var videosDuration = eval(arrVideoDuration.map(x=>x.slice(2).replace("S","").replace("M","*60+").replace("H","*3600+")).join("+").replace(/\+{2}/,"+").replace(/\+$/,""));
 
-              function h(at) {
-                var h = Math.floor(res6 / at / 3600);
-                return h;
-              }
-              function m(at) {
-                var m = Math.floor(((res6 / at) % 3600) / 60);
-                return m;
-              }
-              function s(at) {
-                var s = Math.floor(((res6 / at) % 3600) % 60);
-                return s;
-              }
-            
+              h=at=>Math.floor(videosDuration / at / 3600);
+              m=at=>Math.floor(((videosDuration / at) % 3600) / 60);
+              s=at=>Math.floor(((videosDuration / at) % 3600) % 60);          
 
               $(".at100").text(
                 `${h(1)} hours, ${m(1)} minutes, ${s(1)} seconds`
@@ -108,11 +76,17 @@ $(".getlength").on("click", function () {
               //$(".avg").text(`${havg} hours, ${mavg} minutes, ${savg} seconds`);
       $(".getlength .spinner").css("display","none");
               $(".num").text(arrVideoId.length + " videos");
-              $(".info").delay(1000).css("visibility", "visible");
-              $(".getlength").removeClass("getlength");
-              $("#tryagain").addClass("tryagain");
+              $(".info").css("display", "flex");
+              // $(".getlength").removeClass("getlength");
+              // $("#tryagain").addClass("tryagain");
               $(".error h3").hide();
-              $(".input").attr("disabled", "disabled");
+              // $(".input").attr("disabled", "disabled");
+              videosDuration=0;
+              arrVideoId = [],
+              arrVideoDuration = [];
+              playlistId="";
+              str = "",
+              playlist="";
             }
           
         );
@@ -120,9 +94,9 @@ $(".getlength").on("click", function () {
     ).fail(function () {
       $(".error h3").text("please enter a correct playlist link ");
       $(".getlength .spinner").css("display","none");
-      $(".getlength").removeClass("getlength");
+      // $(".getlength").removeClass("getlength");
       $("#tryagain").addClass("tryagain");
-      $(".input").attr("disabled", "disabled");
+      // $(".input").attr("disabled", "disabled");
     });
     ////
   } else {
@@ -130,9 +104,9 @@ $(".getlength").on("click", function () {
       "please enter a playlist link like www.youtube.com/playlist?list=id"
     );
           $(".getlength .spinner").css("display","none");
-    $(".getlength").removeClass("getlength");
-    $("#tryagain").addClass("tryagain");
-    $(".input").attr("disabled", "disabled");
+    // $(".getlength").removeClass("getlength");
+    // $("#tryagain").addClass("tryagain");
+    // $(".input").attr("disabled", "disabled");
   }
 });
 //click getlength in enter
@@ -141,9 +115,9 @@ $(".input").keydown(function (e) {
     $(".getlength").click();
   }
 });
-$("#tryagain").on("click", function () {
-  location.reload();
-});
+// $("#tryagain").on("click", function () {
+//   location.reload();
+// });
 //make div of info same height
 $(".info > div").outerHeight("250px");
 //var t=$(".info .pr").attr("height");
